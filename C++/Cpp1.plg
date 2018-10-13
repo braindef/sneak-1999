@@ -1,0 +1,20 @@
+--------------------Konfiguration: Cpp1 - Win32 Debug--------------------
+Begining build with project "D:\DATEN\DATEN\Programmieren\C++\Cpp1.dsp", at root.
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+Project's tools are:
+			"32-Bit C/C++-Compiler für 80x86" with flags "/nologo /MLd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Cpp1.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c "
+			"Win32 Resource Compiler" with flags "/l 0x807 /d "_DEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Debug/Cpp1.bsc" "
+			"COFF-Linker für 80x86" with flags "kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Cpp1.pdb" /debug /machine:I386 /out:"Debug/Cpp1.exe" /pdbtype:sept "
+			"Benutzerdefiniertes Erstellen" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\WINDOWS\TEMP\RSPB2F3.TMP" with contents <kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Cpp1.pdb" /debug /machine:I386 /out:"Debug/Cpp1.exe" /pdbtype:sept 
+".\Debug\Cpp1.obj">
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSPB2F3.TMP" 
+Linker-Vorgang läuft...
+
+
+
+Cpp1.exe - 0 Fehler, 0 Warnung(en)

@@ -1,0 +1,17 @@
+--------------------Konfiguration: List - Win32 Debug--------------------
+Begining build with project "D:\Daten\Daten\Programmieren\List.dsp", with item "List.cpp"
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+
+Creating temp file "C:\WINDOWS\TEMP\RSP7281.TMP" with contents </nologo /MLd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/List.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\Daten\Daten\Programmieren\List.cpp"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP7281.TMP" 
+Kompilierung läuft...
+List.cpp
+D:\Daten\Daten\Programmieren\List.cpp(3) : fatal error C1083: Include-Datei kann nicht geoeffnet werden: 'vcl\condefs.h': No such file or directory
+Fehler beim Ausführen von cl.exe.
+
+
+
+List.obj - 1 Fehler, 0 Warnung(en)

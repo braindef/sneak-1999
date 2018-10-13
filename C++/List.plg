@@ -1,0 +1,32 @@
+--------------------Konfiguration: List - Win32 Debug--------------------
+Begining build with project "D:\Daten\Daten\Programmieren\C++\List.dsp", with item "List.cpp"
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+
+Creating temp file "C:\WINDOWS\TEMP\RSP1272.TMP" with contents </nologo /MLd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/List.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\Daten\Daten\Programmieren\C++\List.cpp"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP1272.TMP" 
+Kompilierung läuft...
+List.cpp
+D:\Daten\Daten\Programmieren\C++\List.cpp(18) : error C2065: 'ffblk' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(18) : error C2065: 'dateiInfo' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(21) : error C2061: Syntaxfehler : Bezeichner 'ffblk'
+D:\Daten\Daten\Programmieren\C++\List.cpp(24) : error C2065: 'findfirst' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(24) : error C2065: 'FA_NORMAL' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(24) : error C2065: 'FA_DIREC' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(26) : error C2227: Der linke Teil von '->ff_attrib' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(27) : error C2227: Der linke Teil von '->ff_name' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(27) : error C2227: Der linke Teil von '->ff_name' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(29) : error C2227: Der linke Teil von '->ff_name' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(32) : error C2227: Der linke Teil von '->ff_name' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(37) : error C2227: Der linke Teil von '->ff_name' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(37) : error C2227: Der linke Teil von '->ff_fsize' muss auf Klasse/Struktur/Union zeigen
+D:\Daten\Daten\Programmieren\C++\List.cpp(39) : error C2065: 'findnext' : nichtdeklarierter Bezeichner
+D:\Daten\Daten\Programmieren\C++\List.cpp(43) : error C2541: delete : Objekte, die keine Zeiger sind, koennen nicht geloescht werden
+D:\Daten\Daten\Programmieren\C++\List.cpp(53) : warning C4508: 'main' : Funktion sollte einen Wert zurueckgeben; Ergebnistyp 'void' angenommen
+Fehler beim Ausführen von cl.exe.
+
+
+
+List.obj - 15 Fehler, 1 Warnung(en)

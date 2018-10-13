@@ -1,0 +1,204 @@
+program Nibbles;
+
+uses WinCrt,WinProcs,WinTypes;
+
+(****************** Typen und Objektdefinitionen ****************)
+
+const Feldbreite = 20;                                             (* definition der Spielfeldbreite *)
+      Feldhoehe  = 20;                                             (* definition der Spielfeldhoehe *)
+
+type
+        pos = record                                               (*Benutzerdefinierter Datentyp für Positionen*)
+            x, y : byte;                                           (*Position beinhaltet x- und y-Komponente*)
+        end;
+
+        inhalt     = (leer, hinderniss, futter);                   (*Enumerierung für Inhalt des Schlangenarrays*)
+
+        richtungen = (links, rechts, auf, ab);                      (*Enumerierung für Richtungen*)
+
+        zustand    = (lebend, tod);                                (*Enumerierung für eindeutigen Zustand*)
+
+type
+   Schlange = object
+
+      public
+         constructor Inizialisieren;                               (*Allgemeiner Konstruktor*)
+         destructor Loeschen;                                      (*Allgemeiner Destruktor*)
+         function getZustand:zustand;                              (*Methode für die Zustandsabfrage*)
+         procedure bewegen(richtung : richtungen; var Kopf, Schwanz : pos);
+                                                                   (*Methode für Steuerung der Schlange*)
+
+      private                                                      (*Private Objektdaten*)
+         aktZustand : Zustand;                                     (*Variabel für den Zustand der Schlange (lebend/tod)*)
+         neuePosition : pos;                                       (*Temporäre Position*)
+         Aussehen : array [1..feldbreite*feldhoehe] of pos;        (*1.dimension: länge; 2.dimension: x/y position*)
+         laenge   : integer;                                       (*länge der Schlange : anfangszustand=1*)
+   end;
+(****************** Typen und Objektdefinitionen ****************)
+
+
+(********************** Variabeldefinitionen ********************)
+
+
+var      Spielfeld          : Array [1..Feldbreite,1..Feldhoehe] of inhalt;
+         Spieler1           : Schlange;
+         Spieler2           : Schlange;
+         TasteSpieler       : byte;                                (*Für Tastaturabfrage Spieler*)
+         richtungSpieler1   : richtungen;                          (*Übergabevariabel für Richtung von Spieler 1*)
+         richtungSpieler2   : richtungen;                          (*Übergabevariabel für Richtung von Spieler 2*)
+         LaufVar            : pos;                                 (*Laufvariabel für x-Koordinaten*)
+         Kopf               : pos;                                 (*Übergabe Variabel für Position des Kopfes*)
+         Schwanz            : pos;                                 (*Übergabe Variabel für Position des Schwanzes*)
+         fressen            : pos;                                 (*Variabel für Position des Fressen*)
+         neuesFressen       : boolean;                             (*Zum entscheiden ob ein neues Fressen braucht*)
+         mauer              : pos;
+
+(********************** Variabeldefinitionen ********************)
+
+
+(******************** Funktionen und Prozeduren *****************)
+
+constructor Schlange.Inizialisieren;
+
+var init : integer;                                                (*Laufvariable*)
+
+begin
+   for init := 1 to feldbreite*feldhoehe do                        (*Array Schlange.Aussehen rücksetzen*)
+      begin
+         Aussehen[init].x := 0;
+         Aussehen[init].y := 0;
+      end;
+   aktZustand := lebend;                                           (*Schlange lebendig machen*)
+   laenge := 2;                                                    (*Anfangsläne definieren*)
+end;
+
+procedure Schlange.bewegen(richtung : richtungen; var Kopf, Schwanz : pos);
+                                                                   (*Obiekt zur Steuerung der Schlange*)
+var i  : integer;
+
+begin
+   case ord(richtung) of                                 (*Auswertung und Verarbeitung des übergebenen Tasten-Codes*)
+      2: neuePosition.y := Aussehen[1].y - 1;
+      3: neuePosition.y := Aussehen[1].y + 1;
+      0: neuePosition.x := Aussehen[1].x - 1;
+      1: neuePosition.x := Aussehen[1].x + 1;
+   end;
+   if Spielfeld[neuePosition.x, neuePosition.y] <> leer then
+   begin
+      if Spielfeld[neuePosition.x,neuePosition.y] = hinderniss then aktZustand := tod
+      else                                                         (*übrig bleibt fressen*)
+      begin
+           laenge:=laenge+1;
+           neuesFressen:=True;
+      end;
+   end;
+   i:=laenge;
+   while i > 0 do
+      begin
+         aussehen[i+1]:=aussehen[i];
+         i := i-1;
+      end;
+   aussehen[1]:=neuePosition;
+   Kopf.x := Aussehen[1].x;
+   Kopf.y := Aussehen[1].y;
+   Schwanz.x := Aussehen[Laenge].x;
+   Schwanz.y := Aussehen[Laenge].y;
+end;
+
+
+function Schlange.getZustand:zustand;
+
+begin
+     getZustand:=aktZustand;
+end;
+
+
+destructor Schlange.Loeschen;
+
+begin
+(* Mit dieser Routine wird das Objekt wieder aus dem Speicher gelöscht*)
+end;
+
+procedure FressenGenerieren;
+
+begin
+     while (Spielfeld[fressen.x,fressen.y] <> leer) or NeuesFressen do
+     begin
+          fressen.x := random(Feldbreite)+1;
+          fressen.y := random(Feldhoehe)+1;
+          NeuesFressen := False;
+     end;
+     Spielfeld[Fressen.x,Fressen.y] := futter;
+     GotoXY(Fressen.x,Fressen.y);
+     Write('F');
+end;
+
+
+Procedure Delay(ms : LongInt);
+  Var
+    TickCount : LongInt;
+    M         : TMsg;
+  Begin
+    TickCount := GetTickCount;
+    While GetTickCount - TickCount < ms do
+      If PeekMessage(M,0,0,0,pm_Remove) then
+        Begin
+          TranslateMessage(M); DispatchMessage(M);
+
+        End;
+End;
+
+
+(******************** Funktionen und Prozeduren *****************)
+
+
+
+(************************** Hauptprogramm ***********************)
+begin
+   randomize;
+   Spieler1.Inizialisieren;
+   for LaufVar.y := 1 to feldhoehe do                              (*Spielfeld inizialisieren*)
+      for LaufVar.x := 1 to feldbreite do
+      begin
+         Spielfeld[LaufVar.x,LaufVar.y] := leer;
+      end;
+   NeuesFressen := True;
+   FressenGenerieren;
+   TasteSpieler := 52;
+   while (Spieler1.getZustand <> tod) do
+   begin
+      if keypressed = true then
+      begin
+         TasteSpieler := ord(ReadKey);
+         case TasteSpieler of
+              52:  richtungSpieler1 := links;
+              54:  richtungSpieler1 := rechts;
+              56:  richtungSpieler1 := auf;
+              50:  richtungSpieler1 := ab;
+              115: richtungSpieler2 := links;                 (*s*)
+              102: richtungSpieler2 := rechts;                (*f*)
+              101: richtungSpieler2 := auf;                   (*e*)
+              99:  richtungSpieler2 := ab;                    (*c*)
+         end;
+      end;
+      Spieler1.bewegen(richtungSpieler1, Kopf, Schwanz);
+      if NeuesFressen then FressenGenerieren;
+      Spielfeld[Kopf.x,Kopf.y]:=hinderniss;
+      GotoXY(Kopf.x,Kopf.y);
+      Write ('O');
+      GotoXY(30,25);
+      write(Kopf.x:3,Kopf.y:3,Schwanz.x:3,Schwanz.y:3);
+      Spielfeld[Schwanz.x,Schwanz.y]:=leer;
+      GotoXY(Schwanz.x,Schwanz.y);
+      write(' ');
+      Delay(100);
+   end;
+   Spieler1.Loeschen;
+   Writeln ('Ende');
+end.
+
+
+
+
+
+(************************** Hauptprogramm ***********************)
